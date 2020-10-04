@@ -1,0 +1,38 @@
+class Solution {
+    public int missingNumber(int[] nums) {
+        int n = nums.length;
+        for(int i = 0; i < n + 1; ++i)
+        {
+            for(int j = 0, count = 0; j < n; ++j)
+            {
+                if(nums[j] == i)
+                {
+                    break;
+                }
+                ++ count;
+                if(count == n)
+                {
+                    return i;
+                }
+            }
+        }
+        return 0;
+    }
+}
+
+/** 以上是一个暴力做法，借助一个count查看是否已经算完所有nums。如果算完之后还是没有找到与i相等的nums[j]，则找到了missingnumber
+    另外求和的思想确实有点意思，代码如下：
+    
+    class Solution {
+    public int missingNumber(int[] nums) {
+        int expectedSum = nums.length*(nums.length + 1)/2;
+        int actualSum = 0;
+        for (int num : nums) actualSum += num;
+        return expectedSum - actualSum;
+    }
+}
+
+作者：LeetCode
+链接：https://leetcode-cn.com/problems/missing-number/solution/que-shi-shu-zi-by-leetcode/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 */
