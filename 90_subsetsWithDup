@@ -1,0 +1,46 @@
+class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> res = new ArrayList<>();
+        res.add(new ArrayList<>());
+        for(int i = 0; i < nums.length; ++i)
+        {
+            int rsize = res.size();
+            for(int j = 0; j < rsize; ++j)
+            {
+                List<Integer> temp = new ArrayList<>(res.get(j));
+                temp.add(nums[i]);
+                res.add(temp);
+            }
+        }
+
+/**
+        for(int q = 0;  q < res.size(); ++q)
+        {
+            Collections.sort(res.get(q));
+        }
+*/
+        for(int a = 0; a < res.size(); ++a)
+        {   
+            for(int b = a + 1; b < res.size(); ++b)
+            {
+                if(res.get(a).equals(res.get(b)))
+                {
+                    res.remove(b);
+                    b = a; 
+                }
+            }
+
+        } 
+
+    return res;
+    }
+}
+
+/**
+10.05更新
+由于还不会回溯，只能暴力解决。
+第一部分与78题相同，先得到一个res Arraylist。
+由于在题目中，[1,4,4]和[4,1,4]是相同的，因此对res中的每个list进行sort（或者直接sort nums，可以有一点点空间提升，但是时间还是很烂）
+最后去重。找到了一个重复元素后删除，再把b放回起点，避免因为list改变而漏掉对元素的处理。 注意，由于最后要做一个++b，因此此处只需令 b = a。
+*/
