@@ -20,7 +20,9 @@ class Solution {
     }
 }
 
-/** 以上是一个暴力做法，借助一个count查看是否已经算完所有nums。如果算完之后还是没有找到与i相等的nums[j]，则找到了missingnumber
+/** 以上是一个暴力做法，借助一个count查看是否已经算完所有nums。
+    其中i是一个flag，即为目前正在寻找的值。
+    如果算完之后还是没有找到与i相等的nums[j]，则找到了missingnumber
     另外求和的思想确实有点意思，代码如下：
     
     class Solution {
