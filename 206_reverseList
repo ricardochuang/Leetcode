@@ -1,3 +1,12 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+//以上的定义告诉我们，ListNode里只含有一个int参数
 ==========================================================迭代法================================================================
 class Solution {
     public ListNode reverseList(ListNode head) {
