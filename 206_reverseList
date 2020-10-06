@@ -6,7 +6,7 @@
  *     ListNode(int x) { val = x; }
  * }
  */
-//以上的定义告诉我们，ListNode里只含有一个int参数
+//head是第一个listnode的名字，head.val是第一个数值
 ==========================================================迭代法================================================================
 class Solution {
     public ListNode reverseList(ListNode head) {
