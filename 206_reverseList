@@ -1,0 +1,57 @@
+==========================================================迭代法================================================================
+class Solution {
+    public ListNode reverseList(ListNode head) {
+       ListNode pre = null;
+       ListNode cur = head;
+       while(cur != null)
+       {
+           ListNode temp = cur.next;
+           cur.next = pre;
+           pre = cur;
+           cur = temp;
+       }
+    return pre;
+    }
+}
+
+/**
+以上为迭代做法，实现方法为
+
+1 -> 2 -> 3 -> null
+
+
+null  1 -> 2-> 3 -> null
+pre   cur  temp
+
+null <- 1   2-> 3 -> null
+pre   cur  temp
+
+null <- 1   2-> 3 -> null
+       cur  temp
+       pre
+       
+null <- 1   2-> 3 -> null
+       pre  temp
+            cur
+null <- 1   2-> 3 -> null
+       pre  cur
+       
+注意最后要return一个pre，因为cur此时指向最后一个null.
+*/
+==========================================================递归法================================================================
+class Solution {
+    public ListNode reverseList(ListNode head) {
+      if(head == null || head.next == null)
+      {
+          return head;
+      }
+      ListNode cur = reverseList(head.next);
+      head.next.next = head;
+      head.next = null;
+      return cur;
+    }
+}
+/**
+以上为递归法。可见动画：
+https://leetcode-cn.com/problems/reverse-linked-list/solution/dong-hua-yan-shi-206-fan-zhuan-lian-biao-by-user74/
+}
