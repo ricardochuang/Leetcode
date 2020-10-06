@@ -1,0 +1,45 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+ 
+ =================================================迭代法==============================================================
+class Solution {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode prenode = new ListNode();
+        prenode.val = -1;
+        ListNode cur = prenode;
+        if(l1 == null) return l2;
+        else if(l2 == null) return l1;
+        else
+        while(l1 != null && l2 != null)
+        {
+        if(l1.val <= l2.val)
+        {
+            cur.next = l1;
+            cur = l1;
+            l1 = l1.next;
+        }
+        else
+        {
+            cur.next = l2;
+            cur = l2;
+            l2 = l2.next;
+        }
+        cur.next = l1 == null ? l2 : l1;
+        }
+       
+        return prenode.next;
+    }
+}
+
+/**
+以上为迭代法。先创建一个初始的listnode，然后不断比较l1和l2，取其中的最小值。
+在比较之前要先判断l1是不是为null.
+*/
