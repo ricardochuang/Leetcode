@@ -1,0 +1,36 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if(head == null) return head;                               //检查是否为空。如果为空的话后面的tail就不存在了
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        ListNode cur = head;
+        ListNode tail = cur.next;
+        ListNode pre = dummy;
+        while(cur != null && tail != null)                         // 只要有一个为null就应该终止循环
+        {
+            cur.next = tail.next;
+            pre.next = tail;
+            tail.next = cur;                                       //最朴实的方法进行交换
+
+            pre = cur;
+            cur = pre.next;                                        //交换之后对赋值新的pre，cur，tail
+            if(cur != null)                                        //注意检查cur是不是null，防止tail不存在
+            {
+                tail = cur.next;
+            }
+            else 
+            tail = null;
+        }
+        return dummy.next;
+    }
+}
