@@ -1,0 +1,36 @@
+class RecentCounter {
+    Queue<Integer> q = new LinkedList<>();
+    public RecentCounter() {
+
+    }
+    
+    public int ping(int t) {
+        q.add(t);
+        while(q.peek() < t-3000)
+        {
+            q.poll();
+        }
+        return q.size();
+    }
+}
+
+/**
+ * Your RecentCounter object will be instantiated and called as such:
+ * RecentCounter obj = new RecentCounter();
+ * int param_1 = obj.ping(t);
+ */
+ 
+ /**
+ 这道题第一遍没看懂他想干嘛。
+ 简单来讲就是在一个queue里面添加数字，然后做判断，如果此刻尾部的值比新加入的值小了3000+，就把这个旧数值删除。
+ 
+ 另外总结一点queue的语法：
+ Queue<Integer> q = new LinkedList<>();                   Deque<Integer> q = new LinkedList<>();       
+ q.add(num);   //增加一个数值                              q.addFirst(num); q.addLast(num); 
+ q.size();     //返回queue中元素个数                       q.size();
+ q.toString(); //将queue改为string                        q.toString();
+ q.peek();     //查询尾部的数值                            q.peekFirst();   q.peekLast();
+ q.poll();     //删除尾部的数值                            q.pollFirst();   q.pollLast();
+ q.isEmpty();  //检查是否为空                              q.isEmpty();
+ */
+ 
