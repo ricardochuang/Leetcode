@@ -1,0 +1,48 @@
+class MyStack {
+    Deque<Integer> q = new LinkedList<>();
+    /** Initialize your data structure here. */
+    public MyStack() {
+
+    }
+    
+    /** Push element x onto stack. */
+    public void push(int x) {
+        q.addFirst(x);
+    }
+    
+    /** Removes the element on top of the stack and returns that element. */
+    public int pop() {
+        return q.pollFirst();
+    }
+    
+    /** Get the top element. */
+    public int top() {
+        return q.peekFirst();
+    }
+    
+    /** Returns whether the stack is empty. */
+    public boolean empty() {
+        return q.isEmpty();
+    }
+}
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack obj = new MyStack();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.top();
+ * boolean param_4 = obj.empty();
+ */
+ 
+ /**
+ 直接用了一个Deque实现栈。保证每次都是对First一端操作就好了。
+ 
+ 另外题解里有一种用一个queue完成的方法，就是每次添加元素之后就将所有元素重新排列一遍。
+ 实现方法为：
+         int n = queue.size();
+        queue.offer(x);
+        for (int i = 0; i < n; i++) {
+            queue.offer(queue.poll());
+        }
+*/
