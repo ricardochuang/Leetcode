@@ -1,0 +1,73 @@
+class MyCircularQueue {
+    int[] queue;
+    int head;
+    int capacity;
+    int size;
+    /** Initialize your data structure here. Set the size of the queue to be k. */
+    public MyCircularQueue(int k) {
+        this.capacity = k;
+        this.queue = new int[k];
+        this.head = 0;
+        this.size = 0;
+    }
+    
+    /** Insert an element into the circular queue. Return true if the operation is successful. */
+    public boolean enQueue(int value) {
+        if(this.size == this.capacity)
+            return false;
+        this.queue[(this.head + this.size ) % this.capacity] = value; //因为添加新元素是要添加到tail的后一位，因此和求tail位置的-1抵消了。
+        this.size += 1;
+        return true;
+    }
+    
+    /** Delete an element from the circular queue. Return true if the operation is successful. */
+    public boolean deQueue() {
+        if(this.size == 0)
+            return false;
+        this.head = (this.head + 1) % this.capacity;
+        this.size -= 1;
+        return true;
+    }
+    
+    /** Get the front item from the queue. */
+    public int Front() {
+        if(this.size == 0)
+            return -1;
+         return (this.queue[this.head]);
+    }
+    
+    /** Get the last item from the queue. */
+    public int Rear() {
+        if(this.size == 0)
+            return -1;
+        return(this.queue[(this.head + this.size -1)  % this.capacity]); 
+   
+    }
+    
+    /** Checks whether the circular queue is empty or not. */
+    public boolean isEmpty() {
+        return (this.size == 0);
+    }
+    
+    /** Checks whether the circular queue is full or not. */
+    public boolean isFull() {
+        return (this.size == this. capacity);
+    }
+}
+
+/**
+ * Your MyCircularQueue object will be instantiated and called as such:
+ * MyCircularQueue obj = new MyCircularQueue(k);
+ * boolean param_1 = obj.enQueue(value);
+ * boolean param_2 = obj.deQueue();
+ * int param_3 = obj.Front();
+ * int param_4 = obj.Rear();
+ * boolean param_5 = obj.isEmpty();
+ * boolean param_6 = obj.isFull();
+ */
+ 
+ 
+ /**
+ 本题通过一个数组来实现循环，先开一个数组，数组的大小为capacity。每添加一个元素size加1。头指向第一个元素，尾部可以由 (head + size -1) % capacity 得到。
+ 注意添加元素时因为要加到tail的后面，所以直接由(head + size) % capacity 得到。
+ */
