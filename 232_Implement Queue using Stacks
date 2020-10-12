@@ -1,0 +1,41 @@
+class MyQueue {
+    Deque<Integer> q = new LinkedList<>();
+
+    /** Initialize your data structure here. */
+    public MyQueue() {
+
+    }
+    
+    /** Push element x to the back of queue. */
+    public void push(int x) {
+        q.addFirst(x);
+    }
+    
+    /** Removes the element from in front of queue and returns that element. */
+    public int pop() {
+        return q.pollLast();
+    }
+    
+    /** Get the front element. */
+    public int peek() {
+        return q.peekLast();
+    }
+    
+    /** Returns whether the queue is empty. */
+    public boolean empty() {
+        return q.isEmpty();
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
+ 
+ /**
+ 这可能是一种面试官会顺着网线过来打我的写法。
+ */
