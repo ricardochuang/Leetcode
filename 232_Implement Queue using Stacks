@@ -39,3 +39,60 @@ class MyQueue {
  /**
  这可能是一种面试官会顺着网线过来打我的写法。
  */
+
+
+class MyQueue {
+   Stack<Integer> a;
+   Stack<Integer> b;
+
+    /** Initialize your data structure here. */
+    public MyQueue() {
+        a = new Stack<>();
+        b = new Stack<>();
+    }
+    
+    /** Push element x to the back of queue. */
+    public void push(int x) {
+        a.push(x);
+    }
+    
+    /** Removes the element from in front of queue and returns that element. */
+    public int pop() {
+        if(b.isEmpty())
+            while(!a.isEmpty())
+            {
+                b.push(a.pop());
+            }
+        return b.pop();
+    }
+    
+    /** Get the front element. */
+    public int peek() {
+        if(b.isEmpty())
+            while(!a.isEmpty())
+            {
+                b.push(a.pop());
+            }
+        return b.peek();
+    }
+    
+    /** Returns whether the queue is empty. */
+    public boolean empty() {
+        return a.isEmpty() && b.isEmpty();
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
+ 
+ /**
+ 这个想法就很厉害。
+ 输入都进入到a，只有在需要pop或者peek的时候才需要处理b。
+ 如果b是空的就把a里面的元素压进来，否则就接着处理b的元素就好。
+ */
