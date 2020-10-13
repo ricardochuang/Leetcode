@@ -1,0 +1,25 @@
+class Solution {
+    public String simplifyPath(String path) {
+        String[] s = path.split("/"); //默认/为分隔符，不会被算入string[]中。注意，如果是///，会取出两个空。
+        Stack<String> stack = new Stack<>();//char只能是一个字符，定义的时候用单引号'c'，string是字符串，定义的时候用双引号""
+
+        for(int i = 0; i < s.length; ++i)
+            {           
+            // System.out.print(s[i]);
+            if(s[i].equals("..") && !stack.isEmpty())
+                stack.pop();//注意对于string不能用 == 来判断相等，只能用string.equals()来判断
+            if(!s[i].equals(".") && !s[i].equals("..") && !s[i].equals(""))//注意多个不等于应该用且连接
+                stack.push(s[i]);
+            }
+        if (stack.isEmpty())
+            return "/";
+
+        StringBuffer res = new StringBuffer(); //一种可变类，当字符串大小超过容量之后，会自动增加容量
+        for (int i = 0; i < stack.size(); i++) {
+            res.append("/" + stack.get(i)); //buffer中的一种方法，做string的增加
+        }
+        return res.toString(); //将stringbuffer转化为string
+    }
+
+}
+
