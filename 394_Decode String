@@ -1,0 +1,49 @@
+class Solution {
+    public String decodeString(String s) {
+        // Stack<String> strStack = new Stack<>(); //因为string的stack不能strStack.push(res); 因此直接在这里创建一个stringbuffer类型的stack就好了
+        Stack<StringBuffer> strStack = new Stack<>();
+        Stack<Integer> numStack = new Stack<>();  
+        StringBuffer res = new StringBuffer(); 
+        char[] ch = s.toCharArray();//可以直接用 for(char c : s.toChar Array)
+        int mul = 0;
+        // System.out.print(ch[0]);
+        // System.out.print(ch[0] + 10); //ch[0]不是数字，而是ASCII
+        for(int i = 0; i < s.length(); ++i) //string[]的长度是用s.length; string的长度是s.length()
+        {
+            if(ch[i] >= '0' && ch[i] <= '9')
+            {
+                mul = mul * 10 + (ch[i] - '0'); //对于100[c]，当这个数字不是一个一位数的时候，需要进行乘10操作。
+            }
+            else if(ch[i] == '[')
+            {
+                numStack.push(mul);
+                strStack.push(res);
+                res = new StringBuffer();
+                mul = 0;
+            }
+            else if(ch[i] == ']')
+            {
+                int cnt = numStack.pop();
+                StringBuffer temp = res;
+                res = strStack.pop();
+                for(int j =0; j < cnt; ++j)
+                {
+                    res.append(temp);
+                }
+            }
+            else 
+            {
+                res.append(ch[i]);
+            }
+        }
+    return res.toString();
+    }
+}
+
+/**
+大概思路就是遇到字母，放到res里。
+遇到数字，存到numStack里，注意可能会碰到两位数，三位数，因此要做乘十那一步。
+遇到[，将已有的res放到strStack中，专门处理[]中的字母。
+遇到]，说明[]中字母已经处理结束。首先从numStack中pop一个值，知道这段字母要重复多少次。然后在已经有的res后面加上pop次的字母。具体操作方法是先把当前的res（[]中的字母）给temp，
+然后把已经存好的res取出，进行res.append(temp)
+*/
