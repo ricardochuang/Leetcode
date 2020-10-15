@@ -1,0 +1,70 @@
+class KthLargest {
+    private PriorityQueue<Integer> minPq;
+    private int k;                        //初始化写在最前面
+    public KthLargest(int k, int[] nums) {
+        this.k = k;                       //记得把k赋值
+        minPq = new PriorityQueue<>(); 
+        for (int val : nums)
+        {
+            if(minPq.size() < k)
+            {
+                minPq.add(val);
+            }
+            else
+            {
+                if(val > minPq.peek())
+                {
+                    minPq.poll();
+                    minPq.add(val);
+                }
+            }
+        }
+
+        // for(int i = 0; i < k; ++i) 用上面这种方法不会受到[]影响，这边建议以后对于数组都用上边的写法
+        // {
+        //     if(minPq.size() < k)
+        //     {
+        //         minPq.add(nums[i]);
+        //     }
+        //     else
+        //     {
+        //         if(nums[i] > minPq.peek())
+        //         {
+        //             minPq.poll();
+        //             minPq.add(nums[i]);
+        //         }
+        //     }
+        // }
+        
+    }
+    
+    public int add(int val) {
+        if(minPq.size() < k)
+        {
+            minPq.add(val);
+        }
+        else
+        {
+            if(val > minPq.peek())
+            {
+                minPq.poll();
+                minPq.add(val);
+            }
+        }
+        return  minPq.peek();
+    }
+
+}
+
+/**
+ * Your KthLargest object will be instantiated and called as such:
+ * KthLargest obj = new KthLargest(k, nums);
+ * int param_1 = obj.add(val);
+ */
+ 
+ /**
+ 为了找到第k个最大的，我们最好的方法是维护一个size为k的heap。比如对于[2，4，5，8]，为了找到第3大的（4），可以维护一个size为3的heap（小堆）。
+ 这个堆里面为4，5，8.其中的第一个值就是我们要找的。
+ 对于剩下要加进来的数，如果它的值比4小，就不考虑了。
+ 如果大于4，就把4扔了，把这个数字入heap
+ */
