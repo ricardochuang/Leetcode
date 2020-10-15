@@ -1,0 +1,35 @@
+class Solution {
+    PriorityQueue<Integer> p = new PriorityQueue<>(Collections.reverseOrder());
+    public int lastStoneWeight(int[] stones) {
+        for(int val : stones)
+        {
+            p.add(val);
+        }
+        //把所有数值加入到heap中
+        // if(p.isEmpty())
+        // {
+        //     return 0;
+        // } 刚开始觉得这个位置需要判断一下，后来觉得直接放到最后判断就好了。反正最开始就啥也没有跟磕碎之后啥也没有是一样的，都要返回0.
+        if(p.size() == 1)
+        {
+            return p.peek();
+        }
+        //如果只有有一个，没人陪你玩，自己回来就好了
+        while(p.size() > 1)
+        {
+        int max1 = p.poll();
+        int max2 = p.poll();
+        int dif =  max1 - max2;
+        if(dif != 0)
+        {
+            p.add(dif);
+        }
+        }
+
+        if(p.isEmpty())
+        {
+            return 0;
+        }
+     else return p.peek();
+    }
+}
