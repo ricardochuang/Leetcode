@@ -68,3 +68,14 @@ class KthLargest {
  对于剩下要加进来的数，如果它的值比4小，就不考虑了。
  如果大于4，就把4扔了，把这个数字入heap
  */
+
+
+/**
+PriorityQueue<Integer> minPq = new PriorityQueue<>(); 小堆
+PriorityQueue<Integer> maxPq = new PriorityQueue<>(Collections.reverseOrder()); 大堆
+minPq.add(num);
+minPq.peek();
+minPq.poll();
+minPq.size();
+minPq.isEmpty();
+*/
