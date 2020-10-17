@@ -1,0 +1,25 @@
+class Solution {
+    public String frequencySort(String s) {
+        int[] letters = new int[128];
+        for (char c : s.toCharArray())
+        {   
+            ++letters[c];//这个c应该是字母的ASCII
+        }
+        PriorityQueue<Character> heap = new PriorityQueue<>((a, b) -> (letters[b]) - (letters[a]));
+        StringBuffer res = new StringBuffer(); 
+        for (int i = 0; i < letters.length; ++i) {
+            if (letters[i] != 0) {
+                heap.add((char)i); //这个char也是将ASCII转成字母
+            }
+        }
+        while (!heap.isEmpty()) {
+            char c = heap.poll();
+            // System.out.print(c);
+            while (letters[c]-- > 0) {
+                res.append(c);
+            }
+        }
+
+        return res.toString();
+    }
+}
