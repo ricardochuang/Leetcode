@@ -1,0 +1,27 @@
+class Solution {
+    public List<String> topKFrequent(String[] words, int k) {
+        Map<String, Integer> map = new HashMap();
+        for(String word : words)
+        {
+            map.put(word, map.getOrDefault(word, 0) + 1);
+            // System.out.print(map);
+        }
+        PriorityQueue<String> heap = new PriorityQueue<String>((a, b) -> ((map.get(a)).equals(map.get(b))? b.compareTo(a) : map.get(a) - map.get(b)));//a-b是从小到大排序， b-a是从大到小排序。加了map.get就是说明，我要对于map中的value进行排序。 a.compareTo(b)可以控制按照字典顺序排列(从a-z)，但是因为最后我需要把得到的list反转，因此这个地方需要从z-a排序。
+        for(String word : map.keySet())//keYSet是map中的所有key，组成的set
+        {   
+            // System.out.print(word);
+            heap.add(word);
+            // System.out.print(heap);
+            // System.out.print(heap.peek());
+            if(heap.size() > k)
+            {
+                heap.poll();
+            }
+            // System.out.print(heap);
+        }
+        List<String> ans = new ArrayList();//因为最开始创建的是一个arraylist，所以最后的答案也得是个arraylist
+        while (!heap.isEmpty()) ans.add(heap.poll());
+        Collections.reverse(ans);//将得到的list反转
+        return ans;
+    }
+}
