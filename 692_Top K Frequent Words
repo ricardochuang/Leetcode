@@ -25,3 +25,37 @@ class Solution {
         return ans;
     }
 }
+
+
+//根据692题的做法，用hashmap又做了一次
+
+class Solution {
+    public String frequencySort(String s) {
+        Map<Character, Integer> map = new HashMap();
+        for(char c : s.toCharArray())
+        {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+            // System.out.print(map);
+        }
+        PriorityQueue<Character> heap = new PriorityQueue<>((a, b) -> (map.get(a).equals(map.get(b))? a.compareTo(b) : map.get(b) - map.get(a)) );
+        for(char c : map.keySet())
+        {
+            int value = map.get(c);
+            while(value > 0)
+            {
+                heap.add(c);
+                --value;
+            }
+            
+            // System.out.print(heap);
+            // System.out.print(value);
+        }
+        StringBuffer sb = new StringBuffer();
+        while(!heap.isEmpty())
+        {
+            sb.append(heap.poll());
+        }
+        return sb.toString();
+        // return s;
+    }
+}
