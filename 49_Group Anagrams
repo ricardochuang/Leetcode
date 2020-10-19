@@ -1,0 +1,23 @@
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        HashMap<String, List> map =  new HashMap<>();
+        for(String s : strs)
+        {
+            char[] c = s.toCharArray();
+            Arrays.sort(c);//char[]可以排序
+            String str = String.valueOf(c);//可以将char[]转成string
+            if(!map.containsKey(str)) map.put(str, new ArrayList());
+            map.get(str).add(s);
+            // map.put(str, s);
+            System.out.print(map);
+        }
+        return new ArrayList(map.values());
+    }
+}
+
+/**
+*先创建一个hashmap，这个hashmap是string和list组成的。大概是: {"string" = ["",""]}
+*对于strs[]中的每个string, 先将他取出，变成char，进行sort，再变回string，这个string作为map的第一项，可以用来标志
+*这个list包含哪些字母。
+*如果map中没有这个str，就创建一个新的，然后通过map.get(str).add(s);向ArrayList中添加s
+*/
