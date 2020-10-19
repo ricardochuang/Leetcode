@@ -1,0 +1,44 @@
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i : nums)
+        {
+            map.put(i, map.getOrDefault(i, 0) + 1);
+        }
+        for(int i : map.keySet())
+        {
+            int times = map.get(i);
+            // System.out.print(times);
+            if(times > 1)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+/**
+根据451的hashmap写的这道题。算一下每个数字出现的次数，如果次数大于1，就可以返回true。
+*/
+
+    public boolean containsDuplicate(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i : nums)
+        {
+            if(map.containsKey(i))
+            {
+                return true;
+            }
+            map.put(i, map.getOrDefault(i, 0) + 1);
+        }
+        return false;
+//这样能把时间复杂度降低一些
+
+
+
+map.size();
+map.containsKey(Key);
+map.isEmpty();
+map.getOrDefault(key, defaultvalue);
+map.putIfAbsent(key, value);
