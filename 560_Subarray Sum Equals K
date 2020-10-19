@@ -1,0 +1,27 @@
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+            HashMap<Integer, Integer> map = new HashMap<>();
+            map.put(0, 1);
+            int pre_total = 0, count = 0;
+            for(int i : nums)
+            {
+                pre_total += i;
+                // System.out.print(pre_total);
+                // map.put(pre_total, map.getOrDefault(pre_total, 0) + 1);//不能先插入map再查找，因为可能会出现自己找自己的情况
+                if(map.containsKey(pre_total - k))
+                {
+                    count += map.get(pre_total - k);
+                }
+                map.put(pre_total, map.getOrDefault(pre_total, 0) + 1);
+            } 
+            return count;
+    }
+}
+
+
+/**
+创建一个map，key是到第i个数之前的所有数的和，value是这个和出现的次数。
+注意map中第一个要插入（0，1），也就是代表0出现了1次。
+为了找到下标为从j~i（j < i）的数中，和为k的情况，可以在map里用当前的value - k，得到一个目标数字。
+这个目标数字之前出现了多少次，就会有多少次得到k的机会。
+*/
