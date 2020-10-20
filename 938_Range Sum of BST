@@ -1,0 +1,33 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    int res = 0;
+    public int rangeSumBST(TreeNode root, int L, int R) {
+        traversal(root, L, R);
+        return res;
+    }
+    public void traversal(TreeNode root, int L, int R){
+        if(root == null) return;
+        if(root.val >= L && root.val <= R) res += root.val;
+        traversal(root.left, L, R);
+        traversal(root.right, L, R);
+
+    }
+}
+
+/**
+简单的一个递归的方法。这道题是要找到所有[L,R]中的root的和。
+于是遍历所有节点，满足的话就加到res中。
+遍历的方法用的前序遍历，即此节点，左节点，右节点。
+
+
+注： 中序遍历：左，此，右
+     后序遍历：左，右，此
+ */
