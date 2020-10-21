@@ -31,3 +31,31 @@ class Solution {
 注： 中序遍历：左，此，右
      后序遍历：左，右，此
  */
+
+
+/**
+简化的方法就是考虑到二叉搜索树的特性（左小于root，右大于root）。
+因此如果root.val < L，只需traversal root.right
+同理如果root.val > R, 只需traversal root.left
+
+代码如下：
+public void traversal(TreeNode root, int L, int R) {
+        if (root == null) {
+            return;
+        }
+        // 情况3
+        if (root.val >= L && root.val <= R) {
+            ans += root.val;    // 符合范围，加起来
+            traversal(root.left, L, R);
+            traversal(root.right, L, R);
+        }
+        // 情况1
+        if (root.val < L) {
+            traversal(root.right, L, R);
+        }
+        // 情况2
+        if (root.val > R) {
+            traversal(root.left, L, R);
+        }
+        
+        */
