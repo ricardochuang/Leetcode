@@ -1,0 +1,23 @@
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if(matrix.length == 0 || matrix[0].length == 0) return false;
+        int n = matrix.length;
+        int m = matrix[0].length;
+        int right = m*n - 1;
+        int left = 0;
+        int mid;
+
+        while(left + 1 < right)
+        {
+            mid = left + (right - left) / 2;
+            if(matrix[mid/m][mid%m] == target) return true;
+            else if(matrix[mid/m][mid%m] > target) right = mid;
+            else left = mid;
+        }
+        if(matrix[left/m][left%m] == target) return true;
+        if (matrix[right/m][right%m] == target) return true;
+        return false;
+    }
+}
+
+//对于一个二维数组， 他的两项可以分别用[mid/m][mid%m]来表示
