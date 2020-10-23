@@ -1,0 +1,25 @@
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        int mid;
+        while(left + 1 < right)
+        {
+            mid = left + (right - left) / 2;
+            if(nums[mid] == target) return mid;
+            else if(nums[mid] > target) right = mid;
+            else left = mid;
+        }
+
+        if(nums[left] == target) return left;
+        if(nums[right] == target) return right;
+
+
+        if(nums[right] < target) return right + 1;
+        if(nums[left] > target) return left;
+        return right;
+    }
+    
+}
+
+//正常情况下找完了一圈，这个值应该放在left 和 right 中间，所以直接返回一个right就好，但是还可能在0 or 最后。
