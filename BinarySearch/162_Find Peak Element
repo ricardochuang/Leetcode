@@ -1,0 +1,26 @@
+class Solution {
+    public int findPeakElement(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        int mid;
+
+        if(nums.length == 0) return -1;
+        if(nums.length == 1) return 0;
+        // if(nums.length == 2) return nums[0] > nums[1] ? 0 : 1; 
+
+        while(left +1 < right)
+        {
+            mid = left + (right - left) / 2;
+            if(nums[mid] > nums[mid + 1] && nums[mid] > nums[mid - 1]) return mid;
+
+            if(nums[mid] > nums[mid + 1]) right = mid;
+            else left = mid;
+        }
+
+        return nums[left] > nums[right] ? left : right;
+    }
+}
+
+/*
+因为第n+1个不是比n大就是比n小，因此只需要比较这两个数的大小。如果下一个大，就说明还在上坡。就改变left，right就好。
+*/
