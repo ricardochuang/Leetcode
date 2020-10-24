@@ -16,3 +16,20 @@ class Solution {
 }
 
 //纯暴力解法，会失去offer的那种
+
+
+class Solution {
+    public int findDuplicate(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for(int i : nums)
+        {
+            if(set.contains(i)) return i;
+            set.add(i);
+        }
+        return -1;
+    }
+}
+
+/**
+第一次理解什么是hashset。这个东西会自动排序和去重。
+/*
