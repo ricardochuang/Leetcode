@@ -33,3 +33,28 @@ class Solution {
 /**
 第一次理解什么是hashset。这个东西会自动排序和去重。
 /*
+
+
+class Solution {
+    public int findDuplicate(int[] nums) {
+        int slow = nums[0];
+        int fast = nums[nums[0]];
+        //得到相遇位置
+        while(slow != fast)
+        {
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        }
+
+        //将一个置零，另一个留在相遇位置
+        slow = 0;
+        while(slow != fast)
+        {
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+        return slow;
+    }
+}
+
+//快慢指针。详见b站。
