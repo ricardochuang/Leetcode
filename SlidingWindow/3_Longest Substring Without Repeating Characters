@@ -1,0 +1,23 @@
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        if(s.length() == 0) return 0;
+        HashMap<Character, Integer> map = new HashMap<>();
+        int left = 0;
+        int maxlength = 0;
+        for(int i = 0; i < s.length(); ++i)
+        {
+            if(map.containsKey(s.charAt(i)))
+            {
+                left = Math.max(left, map.get(s.charAt(i))+1);
+            }
+            map.put(s.charAt(i), i);
+            maxlength = Math.max(maxlength, i - left + 1);
+            // System.out.print(map);
+            // System.out.print("left = " + left);
+            // System.out.println("maxlength = " + maxlength);
+        }
+        return maxlength;
+    }
+}
+
+//这个可以说是模板级别的滑动窗口了.
