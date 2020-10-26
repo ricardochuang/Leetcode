@@ -20,3 +20,26 @@ class Solution {
         return chars.length - left;
     }
 }
+
+
+class Solution {
+    public int characterReplacement(String s, int k) {
+        int[] count = new int[26]; //用来计算26个字母出现的次数
+        int left = 0;
+        int right = 0;
+        int historyMaxChar = 0;
+        while(right < s.length())
+        {
+            ++count[s.charAt(right) - 'A']; //统计right位置字母出现次数
+            historyMaxChar = Math.max(historyMaxChar, count[s.charAt(right) - 'A']);//看一下目前哪个字母出现次数最多
+            if(right - left + 1 > historyMaxChar + k) //如果当前的长度大于了目前出现次数最多的字母的次数+允许重复的次数(k),就说明这个window太长了，要缩减。
+            {
+                --count[s.charAt(left) - 'A'];
+                ++left;
+
+            }
+            ++right;
+        }
+        return right - left;
+    }
+}
