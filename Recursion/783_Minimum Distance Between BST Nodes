@@ -32,3 +32,25 @@ class Solution {
 //非常愚蠢的一种办法。先做一遍中序遍历，就可以得到一个从小到大排列的list。然后每次算一遍list中相邻数字的差，存到int[]里，再从中找出最小。
 
 
+
+class Solution {
+    Integer prev, ans;
+    public int minDiffInBST(TreeNode root) {
+        prev = null; //把第一个数赋成最小
+        ans = Integer.MAX_VALUE;//把最后一个数赋值成最大。因为中序遍历是从小到大排列
+        dfs(root);
+        return ans;
+    }
+
+    public void dfs(TreeNode root) {
+        if (root == null) return;
+        dfs(root.left);
+        if (prev != null) //如果现在这个不是第一个，就计算一下差值
+            ans = Math.min(ans, root.val - prev); //最终返回的就是最小的值
+        prev = root.val;
+        dfs(root.right);
+    }
+}
+
+
+
