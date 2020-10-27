@@ -1,0 +1,34 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    List<Integer> res = new ArrayList<>();
+    int dif = 100000;
+    public int minDiffInBST(TreeNode root) {
+        inorder(root);
+        for(int i = 1; i < res.size(); ++i)
+        {
+            int[] diff = new int[res.size() - 1];
+            diff[i - 1] = res.get(i) - res.get(i - 1);
+            dif = Math.min(dif, diff[i - 1]);
+        }
+        return dif;
+    }
+    public void inorder(TreeNode root){
+        if(root == null) return;
+        inorder(root.left);
+        res.add(root.val);
+        inorder(root.right);
+    }
+    
+}
+
+//非常愚蠢的一种办法。先做一遍中序遍历，就可以得到一个从小到大排列的list。然后每次算一遍list中相邻数字的差，存到int[]里，再从中找出最小。
+
+
