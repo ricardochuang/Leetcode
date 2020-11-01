@@ -1,0 +1,35 @@
+class Solution {
+    public int numIslands(char[][] grid) {
+        int count = 0;
+        for(int i = 0; i < grid.length; ++i)
+            for(int j = 0; j < grid[0].length; ++j)
+            {
+                if(grid[i][j] == '1') 
+                {
+                    ++count;
+                    change(grid, i ,j);
+                }
+            }
+        return count;
+    }
+
+    public void change(char[][] grid, int i, int j){
+        if(i < 0 || j < 0 || i >= grid.length || j >= grid[0].length) return;
+        if(grid[i][j] == '0') return;
+
+        grid[i][j] = '0';
+        change(grid, i+1, j);
+        change(grid, i-1, j);
+        change(grid, i, j+1);
+        change(grid, i, j-1);
+
+    }
+}
+
+/**
+思路： 有一个1出现，就可以认为出现了一块陆地，count就可以+1.
+然后把剩下的，与之相邻的1都变成0，以保证不会反复计算。
+注意本题中的数字不是int，是char。
+对于数组，求长度应该是char.length
+对于dfs函数只需要给名字就好（grid），不需要给char[][] grid。
+*/
